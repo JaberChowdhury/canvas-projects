@@ -1,5 +1,3 @@
-# canvas animation on touchmove
+# canvas animation
 
-# specificly made for mobile device
-
-Its the touchmove-1st branch
+Its the bouncing-ball branch
