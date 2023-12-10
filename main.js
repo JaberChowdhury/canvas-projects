@@ -40,6 +40,11 @@ window.onload = () => {
     mouse.y = e.clientY;
     init();
   };
+  canvas.onmousemove = (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+    init();
+  };
 
   class Perticle {
     constructor() {
