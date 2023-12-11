@@ -1,5 +1,10 @@
 const miniperticleArray = [];
-const limit = 5;
+const limit = 45;
+const animate = (context, handleMiniPerticle) => {
+  context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+  handleMiniPerticle();
+  requestAnimationFrame(animate);
+};
 
 class Miniperticle {
   constructor(state) {
@@ -13,13 +18,13 @@ class Miniperticle {
   }
   draw() {
     this.context.beginPath();
-    this.this.context.fillStyle = this.color;
-    this.context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    this.context.fil();
+    this.context.fillStyle = this.color;
+    this.context.arc(this.x, this.y, this.size / limit, 0, Math.PI * 2);
+    this.context.fill();
   }
   update() {
-    this.x += speedX;
-    this.y += speedY;
+    this.x += this.speedX;
+    this.y += this.speedY;
   }
 }
 
@@ -34,10 +39,17 @@ class Perticle {
     this.context = context;
   }
   boom(x, y) {
-    this.context.beginPath();
-    this.context.fillStyle = `hsl(${this.hue},100%,50%)`;
-    this.context.arc(x, y, 50, 0, Math.PI * 2);
-    this.context.fill();
+    for (let i = 0; i < limit; i++) {
+      miniperticleArray.push(
+        new Miniperticle({
+          x,
+          y,
+          size: this.radius * 10,
+          context: this.context,
+          color: `hsl(${this.hue},100%,50%)`,
+        }),
+      );
+    }
   }
   draw() {
     this.context.beginPath();
@@ -61,6 +73,15 @@ class Perticle {
       const a = Math.abs(this.x);
       const b = Math.abs(this.y);
       this.boom(a, b);
+
+      const handleMiniPerticle = () => {
+        for (let i = 0; i < limit; i++) {
+          miniperticleArray[i].draw();
+          miniperticleArray[i].update();
+        }
+      };
+
+      animate(this.context, handleMiniPerticle);
     }
     if (
       this.y + this.radius > canvas.height ||
