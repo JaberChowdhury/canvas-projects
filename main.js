@@ -1,9 +1,10 @@
 import "./style.css";
 import Screen from "./src/Screen.js";
 import Color from "./src/Color.js";
+import dom from "./src/dom.js";
 
 window.onload = () => {
-  const canvas = document.querySelector("#canvas");
+  const canvas = dom("#canvas");
   const context = canvas.getContext("2d");
   const size = {
     w: window.innerWidth,
@@ -16,6 +17,8 @@ window.onload = () => {
     canvas.height = window.innerHeight;
   };
 
+  const limit = 1;
+
   const { w, h } = size;
   canvas.width = w;
   canvas.height = h;
@@ -27,13 +30,18 @@ window.onload = () => {
 
   class Perticle {
     constructor() {
-      this.x = Math.random() * canvas.width;
+      this.x = Math.floor(Math.random() * canvas.width);
+      this.y = Math.floor(Math.random() * canvas.height);
       this.dx = 5;
-      this.y = Math.random() * canvas.height;
       this.dy = this.dx;
-      //this.radius = Math.random() * 10 + 5;
       this.radius = 5;
       this.hue = Math.floor(Math.random() * 100);
+    }
+    boom(x, y) {
+      context.beginPath();
+      context.fillStyle = `hsl(${this.hue},100%,50%)`;
+      context.arc(x, y, 50, 0, Math.PI * 2);
+      context.fill();
     }
     draw() {
       context.beginPath();
@@ -48,25 +56,40 @@ window.onload = () => {
       context.fill();
     }
     update() {
+      this.x += this.dx;
+      this.y += this.dy;
+      if (
+        this.x + this.radius > canvas.width ||
+        Math.abs(this.x) - this.radius < 1
+      ) {
+        const a = Math.abs(this.x);
+        const b = Math.abs(this.y);
+        this.boom(a, b);
+      }
+      if (
+        this.y + this.radius > canvas.height ||
+        Math.abs(this.y) - this.radius < 1
+      ) {
+        const a = Math.abs(this.x);
+        const b = Math.abs(this.y);
+        this.boom(a, b);
+      }
+
       if (this.x + this.radius > canvas.width) {
         this.x = -this.x;
       }
       if (this.y + this.radius > canvas.height) {
         this.y = -this.y;
       }
-      this.x += this.dx;
-      this.y += this.dy;
       this.hue++;
     }
   }
 
-  const drawPerticle = () => {
-    for (let i = 0; i < 65; i++) {
+  (() => {
+    for (let i = 0; i < limit; i++) {
       perticleArray.push(new Perticle());
     }
-  };
-
-  drawPerticle();
+  })();
 
   const handlePerticles = () => {
     for (let i = 0; i < perticleArray.length; i++) {
@@ -76,11 +99,8 @@ window.onload = () => {
   };
 
   const animate = () => {
-    //context.clearRect(0, 0, canvas.width, canvas.height);
-
     context.fillStyle = "rgba(0,0,0,0.1)";
     context.fillRect(0, 0, canvas.width, canvas.height);
-
     handlePerticles();
     requestAnimationFrame(animate);
   };
