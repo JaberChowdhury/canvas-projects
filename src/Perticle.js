@@ -1,8 +1,25 @@
+const miniperticleArray = [];
+const limit = 5;
+
 class Miniperticle {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-    this.speedX = Math.floor(Math.random() * 2.5 - 1);
+  constructor(state) {
+    this.x = state.x;
+    this.y = state.y;
+    this.speedX = Math.random() * 2.5 - 1;
+    this.speedY = Math.random() * 2.5 - 1;
+    this.size = state.size;
+    this.context = state.context;
+    this.color = state.color;
+  }
+  draw() {
+    this.context.beginPath();
+    this.this.context.fillStyle = this.color;
+    this.context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    this.context.fil();
+  }
+  update() {
+    this.x += speedX;
+    this.y += speedY;
   }
 }
 
