@@ -50,12 +50,9 @@ window.onload = () => {
     constructor() {
       this.x = mouse.x;
       this.y = mouse.y;
-      //this.x = Math.random() * canvas.width;
-      //this.y = Math.random() * canvas.height;
       this.size = Math.random() * 7 + 1;
       this.speedX = Math.random() * 5 - 2.5;
       this.speedY = Math.random() * 5 - 2.5;
-      //this.fillStyle = Color();
       this.fillStyle = `hsl(${hue},100%,50%)`;
     }
     update() {
@@ -64,7 +61,6 @@ window.onload = () => {
       if (this.size > 0.2) this.size -= 0.1;
     }
     draw() {
-      // context.fillStyle = Color();
       context.beginPath();
       context.fillStyle = this.fillStyle;
       context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -95,15 +91,29 @@ window.onload = () => {
   };
 
   const animate = () => {
-    // context.clearRect(0, 0, canvas.width, canvas.height);
     context.beginPath();
     context.fillStyle = "rgba(0,0,0,0.1)";
     context.fillRect(0, 0, canvas.width, canvas.height);
     hue++;
     handlePerticles();
-    // automate()
-    //  init();
     requestAnimationFrame(animate);
   };
   animate();
+
+  setInterval(() => {
+    const speed = 10;
+    if (mouse.x < canvas.width) {
+      mouse.x += speed;
+    } else {
+      mouse.x = -mouse.x;
+    }
+
+    if (mouse.y < canvas.height) {
+      mouse.y += speed;
+    } else {
+      mouse.y = -mouse.y;
+    }
+
+    init();
+  }, 1);
 };
