@@ -26,8 +26,8 @@ window.onload = () => {
   context.fill();
 
   const mouse = {
-    x: 0,
-    y: 0,
+    x: 20,
+    y: 20,
   };
 
   canvas.ontouchmove = (e) => {
@@ -48,16 +48,16 @@ window.onload = () => {
 
   class Perticle {
     constructor() {
-      this.x = mouse.x;
-      this.y = mouse.y;
-      this.size = Math.random() * 7 + 1;
-      this.speedX = Math.random() * 5 - 2.5;
-      this.speedY = Math.random() * 5 - 2.5;
-      this.fillStyle = `hsl(${hue},100%,50%)`;
+      this.x = Math.abs(mouse.x);
+      this.y = Math.abs(mouse.y);
+      this.size = Math.random() * 3 + 1;
+      this.dx = Math.random() * 5 - 2.5;
+      this.dy = Math.random() * 5 - 2.5;
+      this.fillStyle = `hsl(${hue},100%,40%)`;
     }
     update() {
-      this.x += this.speedX;
-      this.y += this.speedY;
+      this.x += this.dx;
+      this.y += this.dy;
       if (this.size > 0.2) this.size -= 0.1;
     }
     draw() {
@@ -69,7 +69,7 @@ window.onload = () => {
   }
 
   const init = () => {
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 60; i++) {
       perticlesArray.push(new Perticle());
     }
   };
@@ -100,19 +100,27 @@ window.onload = () => {
   };
   animate();
 
-  setInterval(() => {
-    const speed = 10;
-
-    if (mouse.x > canvas.width || Math.abs(mouse.x) < 1) {
-      mouse.x += speed;
+  const variant = () => {
+    const speed = 5;
+    if (mouse.x > canvas.width) {
+      mouse.x = -mouse.x;
     }
-
-    if (mouse.y < canvas.height) {
-      mouse.y += speed;
-    } else {
+    if (mouse.y > canvas.height) {
       mouse.y = -mouse.y;
     }
-
+    mouse.x += speed;
+    mouse.y += speed;
     init();
-  }, 1);
+
+    requestAnimationFrame(variant);
+  };
+
+  variant();
+
+  /*
+  setInterval(() => {
+    mouse.x = Math.random() * canvas.width
+    mouse.y = Math.random() * canvas.height
+  }, 1000);
+  */
 };
