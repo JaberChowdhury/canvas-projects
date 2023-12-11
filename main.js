@@ -102,10 +102,9 @@ window.onload = () => {
 
   setInterval(() => {
     const speed = 10;
-    if (mouse.x < canvas.width) {
+
+    if (mouse.x > canvas.width || Math.abs(mouse.x) < 1) {
       mouse.x += speed;
-    } else {
-      mouse.x = -mouse.x;
     }
 
     if (mouse.y < canvas.height) {
