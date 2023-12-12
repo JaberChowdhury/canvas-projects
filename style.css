@@ -6,10 +6,15 @@
   position: relative;
 }
 body {
+  width: 100%;
   position: relative;
   overflow: hidden;
-  /*
- background: -webkit-linear-gradient(45deg, #ff8a00, #ffc100);
-*/
-  background-color: black;
+  background-color: #eee6e6;
+  opacity: 0.8;
+  background-image: radial-gradient(#3d3d3d 0.9px, transparent 0.9px),
+    radial-gradient(#3d3d3d 0.9px, #eee6e6 0.9px);
+  background-size: 36px 36px;
+  background-position:
+    0 0,
+    18px 18px;
 }
