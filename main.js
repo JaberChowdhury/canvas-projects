@@ -30,12 +30,10 @@ window.onload = (e) => {
     mouse.y = e.touches[0].clientY;
   };
 
-  /*
   window.onmousemove = (e) => {
-    mouse.x = e.clientX
-    mouse.y = e.clientY 
-  }
-  */
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  };
 
   class Perticle {
     constructor() {
