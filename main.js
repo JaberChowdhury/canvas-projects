@@ -16,6 +16,7 @@ window.onload = (e) => {
     y: undefined,
   };
   const limit = 600;
+  const colors = ["#034159", "#025951", "#02735E", "#038C3E", "#0CF25D"];
 
   canvas.width = ww;
   canvas.height = wh;
@@ -39,17 +40,22 @@ window.onload = (e) => {
     constructor() {
       this.x = Math.floor(Math.random() * canvas.width);
       this.y = Math.floor(Math.random() * canvas.height);
-      this.hue = Math.floor(Math.random() * 360);
+      //this.hue = Math.floor(Math.random() * 360);
       this.speedX = Math.floor(Math.random() * 2) + 0.5;
       this.speedY = Math.floor(Math.random() * 2) + 0.5;
       this.size = Math.random() * 6 + 2;
+      this.color = colors[Math.floor(Math.random() * 5)];
+      this.stroke = colors.reverse()[Math.floor(Math.random() * 5)];
       this.bol = [true, false][Math.floor(Math.random() * 2)];
     }
     draw() {
       ctx.beginPath();
-      ctx.fillStyle = `hsl(${this.hue},100%,25%)`;
+      //ctx.fillStyle = `hsl(${this.hue},100%,25%)`;
+      ctx.fillStyle = this.color;
+      ctx.strokeStyle = this.stroke;
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
       ctx.fill();
+      ctx.stroke();
     }
     update() {
       if (this.bol) {
@@ -59,7 +65,6 @@ window.onload = (e) => {
         this.x -= this.speedX;
         this.y -= this.speedY;
       }
-
       if (this.x + this.size > canvas.width || this.x - this.size < 0) {
         this.speedX = -this.speedX;
       }
