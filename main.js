@@ -18,7 +18,7 @@ window.onload = () => {
     canvas.height = window.innerHeight;
   };
 
-  const limit = 1;
+  const limit = 2;
   const perticleArray = [];
 
   const { w, h } = size;
@@ -39,6 +39,8 @@ window.onload = () => {
       perticleArray[i].update();
     }
   };
+
+  //  setInterval(handlePerticles,1000)
 
   const animate = () => {
     context.fillStyle = "rgba(0,0,0,0.1)";

@@ -2,4 +2,4 @@
 
 ## check the repository branch for more
 
-### Its the bouncing-ball-2.0 branch
+### Its the bouncing-ball-3.0 branch
