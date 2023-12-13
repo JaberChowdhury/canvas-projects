@@ -26,10 +26,15 @@ window.onload = (e) => {
     canvas.height = wh;
   };
 
+<<<<<<< HEAD
   window.ontouchmove = (e) => {
     mouse.x = e.touches[0].clientX;
     mouse.y = e.touches[0].clientY;
   };
+=======
+  const limit = 2;
+  const perticleArray = [];
+>>>>>>> bouncing-ball-3.0
 
   window.onmousemove = (e) => {
     mouse.x = e.clientX;
@@ -93,6 +98,7 @@ window.onload = (e) => {
     }
   };
 
+<<<<<<< HEAD
   makePerticles();
 
   const handlePerticle = () => {
@@ -100,6 +106,15 @@ window.onload = (e) => {
       perticlesArray[i].draw();
       perticlesArray[i].update();
     }
+=======
+  //  setInterval(handlePerticles,1000)
+
+  const animate = () => {
+    context.fillStyle = "rgba(0,0,0,0.1)";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    handlePerticles();
+    requestAnimationFrame(animate);
+>>>>>>> bouncing-ball-3.0
   };
 
   const animation = () => {

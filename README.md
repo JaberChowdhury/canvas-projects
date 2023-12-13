@@ -3,4 +3,5 @@
 ## check the repository branch for more
 
 
-### Its the glowing-perticle branch
+### Its the bouncing-ball-3.0 branch
+>>>>>>> bouncing-ball-3.0
