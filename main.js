@@ -30,6 +30,7 @@ window.onload = () => {
     "#E2C799",
     "#F2ECBE",
   ];
+  
   context.fillRect(0, 0, canvas.width, canvas.height);
 
   const init = () => {
