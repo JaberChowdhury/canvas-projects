@@ -1,9 +1,7 @@
 import "./style.css";
 import dom from "./src/dom.js";
 
-window.onload = (e) => {
-  console.log(e.timeStamp);
-
+window.onload = () => {
   const canvas = dom("#canvas");
   const context = canvas.getContext("2d");
 
@@ -73,7 +71,6 @@ window.onload = (e) => {
       perticlesArray[i].update();
     }
   };
-  makePerticles();
   const animate = () => {
     context.clearRect(0, 0, canvas.width, canvas.height);
     handlePerticles();
