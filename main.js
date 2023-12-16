@@ -40,7 +40,9 @@ window.onload = () => {
   class Perticle {
     constructor() {
       this.size = 10;
-      this.x = Math.floor(Math.random() * canvas.width - 20 + 1) + 20;
+      this.x =
+        Math.floor(Math.random() * (canvas.width - this.size - this.size)) +
+        this.size;
       this.y = Math.floor(Math.random() * 200);
       this.dy = 5;
       this.gravity = 1;
