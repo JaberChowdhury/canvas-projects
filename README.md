@@ -8,6 +8,7 @@
 - [bouncing-ball-3.0](https://github.com/JaberChowdhury/canvas-projects/tree/bouncing-ball-3.0)
 - [collision](https://github.com/JaberChowdhury/canvas-projects/tree/collision)
 - [collision-2.0](https://github.com/JaberChowdhury/canvas-projects/tree/collision-2.0)
+-[collision-3.0](https://github.com/JaberChowdhury/canvas-projects/tree/collision-3.0)
 - [glowing-perticle](https://github.com/JaberChowdhury/canvas-projects/tree/glowing-perticle)
 - [gravity](https://github.com/JaberChowdhury/canvas-projects/tree/gravity)
 - [gravity-2.0](https://github.com/JaberChowdhury/canvas-projects/tree/gravity-2.0)
