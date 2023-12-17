@@ -14,10 +14,6 @@
 - [touchmove-1st](https://github.com/JaberChowdhury/canvas-projects/tree/touchmove-1st)
 - [touchmove-1st-auto](https://github.com/JaberChowdhury/canvas-projects/tree/touchmove-1st-auto)
 
-## Authors
-
-- [@JaberChowdhury](https://www.github.com/JaberChowdhury)
-
 ## Get started
 
 #### Clone the repository
@@ -38,3 +34,7 @@ npm install
 ```bash
 npm run dev
 ```
+
+## Authors
+
+[Mohammad Jaber Chowdhury](https://www.github.com/JaberChowdhury)
