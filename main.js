@@ -39,15 +39,18 @@ window.onload = () => {
 
   class Perticle {
     constructor() {
-      this.size = 10;
+      this.size = Math.random() * 10 + 2;
       this.x =
         Math.floor(Math.random() * (canvas.width - this.size - this.size)) +
         this.size;
       this.y = Math.floor(Math.random() * 200);
+      this.dx = 5;
       this.dy = 5;
       this.gravity = 1;
       this.color = colors[Math.floor(Math.random() * colors.length)];
       this.friction = 0.9;
+      this.yvalues = [];
+      this.index = -1;
     }
     draw() {
       context.beginPath();
@@ -56,11 +59,26 @@ window.onload = () => {
       context.fill();
     }
     update() {
+      this.x += this.dx;
       this.y += this.dy;
+
+      if (Math.abs(this.yvalues[this.index] - this.y) < this.size) {
+        this.dx = 0;
+      }
+
+      if (
+        this.x + this.size + this.dx > canvas.width ||
+        this.x - this.size < 0
+      ) {
+        this.dx = -this.dx;
+      }
+
       if (this.y + this.size + this.dy > canvas.height) {
         this.dy = -this.dy * this.friction;
+        this.index++;
+        this.yvalues.push(Math.floor(this.y + this.size));
       } else {
-        this.dy += this.gravity;
+        this.dy += this.gravity * this.size;
       }
     }
   }
