@@ -1,5 +1,6 @@
 import "./style.css";
 import dom from "./src/dom.js";
+import _ from "lodash";
 
 window.onload = () => {
   const canvas = dom("#canvas");
@@ -11,8 +12,8 @@ window.onload = () => {
   };
 
   window.onresize = () => {
-    canvas.width = ww;
-    canvas.height = wh;
+    canvas.width = size.w;
+    canvas.height = size.h;
   };
   canvas.width = size.w;
   canvas.height = size.h;
@@ -20,6 +21,7 @@ window.onload = () => {
   // state
   const limit = 100;
   const perticlesArray = [];
+  const randomAxis = [];
   const colors = [
     "#FDF7E4",
     "#FAEED1",
@@ -35,32 +37,15 @@ window.onload = () => {
     y: 0,
   };
 
-  /*
-   x1 = circle1.x
-   y1 = circle1.y
-   x2 = circle2.x
-   y2 = circle2.y
-  */
-
-  const calculateDistance = (x1, y1, x2, y2) => {
-    const distanceX = x2 - x1;
-    const distanceY = y2 - y1;
-    return Math.sqrt(Math.pow(distanceX, 2) + Math.pow(distanceY, 2));
-  };
-
-  canvas.ontouchmove = (e) => {
-    mouse.x = e.touches[0].clientX;
-    mouse.y = e.touches[0].clientY;
-  };
-
-  context.fillRect(0, 0, canvas.width, canvas.height);
-
   class Circle {
     constructor(x, y, size, color) {
       this.x = x;
       this.y = y;
-      this.size = size;
+      this.size = size; // radius of the circle
       this.color = color;
+      this.dx = 5;
+      this.dy = 5;
+      this.direction = [1, -1][_.random(0, 2)];
     }
     draw() {
       context.beginPath();
@@ -69,43 +54,73 @@ window.onload = () => {
       context.fill();
     }
     update() {
-      this.x = mouse.x;
-      this.y = mouse.y;
+      this.x += this.dx * this.direction;
+      this.y += this.dy * this.direction;
+
+      if (
+        this.x + this.size + this.dx > canvas.width ||
+        this.x - this.size < 0
+      ) {
+        this.dx = -this.dx;
+      }
+      if (
+        this.y + this.size + this.dy > canvas.height ||
+        this.y - this.size < 0
+      ) {
+        this.dy = -this.dy;
+      }
     }
   }
 
-  const circle1 = new Circle(
+  const mega_circle = new Circle(
     canvas.width / 2,
     canvas.height / 2,
-    60,
-    colors[0],
+    40,
+    colors[1],
   );
-  const circle2 = new Circle(mouse.x, mouse.y, 30, colors[5]);
+
+  const generateAxis = () => {
+    randomAxis.push({
+      x: _.random(30, canvas.width - 70),
+      y: _.random(30, Math.floor(canvas.height / 2 - 70)),
+    });
+
+    randomAxis.push({
+      x: _.random(30, canvas.width - 30),
+      y: _.random(
+        Math.floor(canvas.height / 2 + 70),
+        Math.floor(canvas.height - 30),
+      ),
+    });
+  };
 
   const init = () => {
-    circle1.draw();
-    circle2.draw();
-    circle2.update();
-    const distance = calculateDistance(
-      canvas.width / 2,
-      canvas.height / 2,
-      mouse.x,
-      mouse.y,
-    );
-    context.font = "30px sans-serif";
+    for (let i = 0; i < limit; i++) {
+      const index = _.random(0, randomAxis.length);
+      generateAxis();
+      perticlesArray.push(
+        new Circle(
+          randomAxis[index].x,
+          randomAxis[index].y,
+          _.random(8, 30),
+          colors[_.random(0, colors.length)],
+        ),
+      );
+    }
+  };
+  init();
 
-    if (distance < circle1.size + circle2.size) {
-      circle1.color = "red";
-      context.fillText("Boom 💣", canvas.width / 2.5, 100);
-    } else {
-      context.fillText("move small circle", canvas.width / 5.5, 100);
-      circle1.color = colors[0];
+  const handlePerticles = () => {
+    for (let i = 0; i < limit; i++) {
+      perticlesArray[i].draw();
+      perticlesArray[i].update();
     }
   };
 
   const animate = () => {
     context.clearRect(0, 0, canvas.width, canvas.height);
-    init();
+    mega_circle.draw();
+    handlePerticles();
     requestAnimationFrame(animate);
   };
   animate();
