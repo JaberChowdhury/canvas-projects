@@ -2,4 +2,4 @@
 
 ## check the repository branch for more
 
-### Its the gravity branch
+### It's the gravity-2.0 branch
