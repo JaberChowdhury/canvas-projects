@@ -36,12 +36,14 @@ window.onload = () => {
     x: canvas.width / 2,
     y: canvas.height / 2,
   };
+
   /*
   canvas.ontouchmove = (e) => {
     mouse.x = e.touches[0].clientX;
     mouse.y = e.touches[0].clientY;
   };
-*/
+  */
+
   const calculate_distance = (x1, y1, x2, y2) => {
     const distanceX = x2 - x1;
     const distanceY = y2 - y1;
@@ -148,6 +150,7 @@ window.onload = () => {
     //context.fillRect(0, 0, canvas.width, canvas.height);
     mega_circle.draw();
     handlePerticles();
+
     requestAnimationFrame(animate);
   };
   animate();
