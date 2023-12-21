@@ -3,12 +3,15 @@
 ## Check the branches
 
 <<<<<<< HEAD
+
 ### Its the collision-3.0 branch
 
 ### this project is failed
 
 ### need to learn collision detection for multiple object and interact with them
+
 =======
+
 - [main](https://github.com/JaberChowdhury/canvas-projects/tree/main)
 - [bouncing-ball](https://github.com/JaberChowdhury/canvas-projects/tree/bouncing-ball)
 - [bouncing-ball-2.0](https://github.com/JaberChowdhury/canvas-projects/tree/bouncing-ball-2.0)
@@ -46,4 +49,5 @@ npm run dev
 ## Authors
 
 [Mohammad Jaber Chowdhury](https://www.github.com/JaberChowdhury)
->>>>>>> main
+
+> > > > > > > main
