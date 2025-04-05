@@ -1,14 +1,15 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "CommonJS",
-    "outDir": "./dist",
-    "rootDir": "./src",
+    "lib": ["ES2021"],
+    "module": "ESNext",
+    "noEmit": true,
     "strict": true,
-    "esModuleInterop": true,
-    "declaration": true,
-    "declarationDir": "./dist/types"
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "bundler",
+    "useDefineForClassFields": true,
+    "allowImportingTsExtensions": true
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src"]
 }
