@@ -65,22 +65,72 @@ window.onload = () => {
     ctx,
   });
 
-  const dot_circle = new Circle({
-    x: config.plusSign.centerX,
-    y: config.plusSign.centerY + config.plusSign.verticalLength - 310 / 2,
-    radius: config.centerCircle.radius - 5,
-    ctx,
-  });
+  // Create 4 circles for each edge of the plus sign
+  const edgeCircles = [
+    // End of vertical bar (top)
+    new Circle({
+      x: config.plusSign.centerX,
+      y: config.plusSign.centerY,
+      radius: config.centerCircle.radius - 5,
+      fillStyle: "red",
+      strokeStyle: "red",
+      ctx,
+    }),
+    // End of vertical bar (bottom)
+    new Circle({
+      x: config.plusSign.centerX,
+      y: config.plusSign.centerY,
+      radius: config.centerCircle.radius - 5,
+      fillStyle: "blue",
+      strokeStyle: "blue",
+      ctx,
+    }),
+    // End of horizontal bar (right)
+    new Circle({
+      x: config.plusSign.centerX,
+      y: config.plusSign.centerY,
+      radius: config.centerCircle.radius - 5,
+      fillStyle: "green",
+      strokeStyle: "green",
+      ctx,
+    }),
+    // End of horizontal bar (left)
+    new Circle({
+      x: config.plusSign.centerX,
+      y: config.plusSign.centerY,
+      radius: config.centerCircle.radius - 5,
+      fillStyle: "#98A1BC",
+      strokeStyle: "#98A1BC",
+      ctx,
+    }),
+  ];
+
+  function updateEdgeCircles() {
+    // Vertical bar ends (top and bottom)
+    const vBar = verticalBar;
+    const vHalf = vBar.length / 2;
+    edgeCircles[0].x = vBar.centerX + vHalf * Math.cos(vBar.angle);
+    edgeCircles[0].y = vBar.centerY + vHalf * Math.sin(vBar.angle);
+    edgeCircles[1].x = vBar.centerX - vHalf * Math.cos(vBar.angle);
+    edgeCircles[1].y = vBar.centerY - vHalf * Math.sin(vBar.angle);
+    // Horizontal bar ends (right and left)
+    const hBar = horizontalBar;
+    const hHalf = hBar.length / 2;
+    edgeCircles[2].x = hBar.centerX + hHalf * Math.cos(hBar.angle);
+    edgeCircles[2].y = hBar.centerY + hHalf * Math.sin(hBar.angle);
+    edgeCircles[3].x = hBar.centerX - hHalf * Math.cos(hBar.angle);
+    edgeCircles[3].y = hBar.centerY - hHalf * Math.sin(hBar.angle);
+  }
   // Pass functions, not function calls!
   Animate(
     [
       () => horizontalBar.update(),
       () => verticalBar.update(),
+      () => updateEdgeCircles(),
       () => horizontalBar.draw(),
       () => verticalBar.draw(),
       () => center_circle.draw(),
-      () => dot_circle.draw(),
-      // () => dot_circle.update(-2, 0),
+      ...edgeCircles.map((c) => () => c.draw()),
     ],
     canvas,
     ctx
