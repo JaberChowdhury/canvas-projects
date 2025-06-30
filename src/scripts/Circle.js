@@ -2,7 +2,7 @@ class Circle {
   constructor({
     x = 0,
     y = 0,
-    radius = 0,
+    radius = 10,
     fillStyle = "red",
     strokeStyle = "red",
     ctx,

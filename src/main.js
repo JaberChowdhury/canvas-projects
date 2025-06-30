@@ -65,6 +65,12 @@ window.onload = () => {
     ctx,
   });
 
+  const dot_circle = new Circle({
+    x: config.plusSign.centerX,
+    y: config.plusSign.centerY + config.plusSign.verticalLength - 310 / 2,
+    radius: config.centerCircle.radius - 5,
+    ctx,
+  });
   // Pass functions, not function calls!
   Animate(
     [
@@ -73,6 +79,8 @@ window.onload = () => {
       () => horizontalBar.draw(),
       () => verticalBar.draw(),
       () => center_circle.draw(),
+      () => dot_circle.draw(),
+      // () => dot_circle.update(-2, 0),
     ],
     canvas,
     ctx
