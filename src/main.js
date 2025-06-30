@@ -109,16 +109,20 @@ window.onload = () => {
     // Vertical bar ends (top and bottom)
     const vBar = verticalBar;
     const vHalf = vBar.length / 2;
-    edgeCircles[0].x = vBar.centerX + vHalf * Math.cos(vBar.angle);
+    // edgeCircles[0].x = vBar.centerX + vHalf * Math.cos(vBar.angle);
+    edgeCircles[0].x += -1;
     edgeCircles[0].y = vBar.centerY + vHalf * Math.sin(vBar.angle);
-    edgeCircles[1].x = vBar.centerX - vHalf * Math.cos(vBar.angle);
+    // edgeCircles[1].x = vBar.centerX - vHalf * Math.cos(vBar.angle);
+    edgeCircles[1].x += -1;
     edgeCircles[1].y = vBar.centerY - vHalf * Math.sin(vBar.angle);
     // Horizontal bar ends (right and left)
     const hBar = horizontalBar;
     const hHalf = hBar.length / 2;
-    edgeCircles[2].x = hBar.centerX + hHalf * Math.cos(hBar.angle);
+    // edgeCircles[2].x = hBar.centerX + hHalf * Math.cos(hBar.angle);
+    edgeCircles[2].x += -1;
     edgeCircles[2].y = hBar.centerY + hHalf * Math.sin(hBar.angle);
-    edgeCircles[3].x = hBar.centerX - hHalf * Math.cos(hBar.angle);
+    // edgeCircles[3].x = hBar.centerX - hHalf * Math.cos(hBar.angle);
+    edgeCircles[3].x += -1;
     edgeCircles[3].y = hBar.centerY - hHalf * Math.sin(hBar.angle);
   }
   // Pass functions, not function calls!
